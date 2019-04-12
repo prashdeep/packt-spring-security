@@ -21,6 +21,7 @@ public class UserRegistrationController {
         this.userService = userService;
     }
 
+
     @GetMapping("/register")
     public ModelAndView displayRegistrationPage(ModelAndView modelAndView,
                                                 User user){
@@ -47,6 +48,9 @@ public class UserRegistrationController {
             modelAndView.setViewName("register");
             return modelAndView;
         }
+
+        String password = user.getPassword();
+
         userService.saveUser(user);
         modelAndView.addObject("confirmMessage",
                 "User is successfully registered");
