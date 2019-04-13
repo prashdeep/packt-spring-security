@@ -1,6 +1,7 @@
 package com.classpath.userregistration.model;
 
 import com.classpath.userregistration.constraint.PasswordMatch;
+import com.classpath.userregistration.constraint.ValidPassword;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -28,7 +29,9 @@ public class User {
     @NotEmpty(message = "email cannot be empty")
     private String email;
 
-    @NotEmpty(message = "password cannot be blank")
+    @ValidPassword(message = "Password should contain atleast one uppercase" +
+            "letter, one lowercase letter, one digit and one special" +
+            "character")
     private String password;
 
     @Transient
