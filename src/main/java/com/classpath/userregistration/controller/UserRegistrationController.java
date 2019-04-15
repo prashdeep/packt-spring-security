@@ -1,11 +1,13 @@
 package com.classpath.userregistration.controller;
 
 import com.classpath.userregistration.model.User;
+import com.classpath.userregistration.model.UserPassword;
 import com.classpath.userregistration.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
@@ -57,4 +59,22 @@ public class UserRegistrationController {
         modelAndView.setViewName("registration-success");
         return modelAndView;
     }
+
+    @PostMapping("/passwordReset/{token}")
+    public ModelAndView passwordReset(ModelAndView modelAndView,
+                                      @PathVariable("token") String confirmationToken,
+                                      @Valid UserPassword userPassword,
+                                      BindingResult bindingResult){
+
+        try {
+            this.userService.resetPassword(userPassword, confirmationToken);
+        } catch (IllegalArgumentException exception){
+
+        }
+
+        modelAndView.setViewName("register");
+        return modelAndView;
+    }
+
+
 }

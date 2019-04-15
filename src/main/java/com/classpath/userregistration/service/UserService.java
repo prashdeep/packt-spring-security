@@ -1,6 +1,7 @@
 package com.classpath.userregistration.service;
 
 import com.classpath.userregistration.model.User;
+import com.classpath.userregistration.model.UserPassword;
 import com.classpath.userregistration.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,5 +37,23 @@ public class UserService {
         user2.setPassword(encryptedPassword);
         user2.setConfirmPassword(encryptedPassword);
         this.userRepository.save(user2);
+    }
+
+
+    public void resetPassword(UserPassword userPassword, String confirmationToken) {
+        Optional<User> optionalUser = this.userRepository.findByConfirmationToken("");
+
+        if (!optionalUser.isPresent()){
+            // invalid token
+            throw new IllegalArgumentException("Invalid token");
+        } else {
+            User user = optionalUser.get();
+            String password = userPassword.getPassword();
+            String encryptedPassword = bCryptPasswordEncoder.encode(password);
+            user.setPassword(encryptedPassword);
+            user.setConfirmPassword(encryptedPassword);
+            this.userRepository.save(user);
+        }
+
     }
 }

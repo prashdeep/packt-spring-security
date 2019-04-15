@@ -36,4 +36,8 @@ public class User {
     @NotEmpty(message = "confirm password cannot be blank")
     private String confirmPassword;
 
+
+    @NotEmpty(message = "confirm password cannot be blank")
+    private String confirmationToken;
+
 }
