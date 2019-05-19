@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "User")
@@ -13,7 +14,6 @@ import javax.validation.constraints.NotEmpty;
 @PasswordMatch(password = "password",
         message = "password and confirm password fields should match")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -37,5 +37,14 @@ public class User {
     @Transient
     @NotEmpty(message = "confirm password cannot be blank")
     private String confirmPassword;
+
+    @Column(name="token")
+    private String token;
+
+    @Column(name = "token_created_time")
+    private LocalDateTime tokenCreatedTime;
+
+    @Column(name="enabled")
+    private boolean enabled;
 
 }

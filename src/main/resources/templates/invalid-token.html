@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <title>Email Confirm</title>
+</head>
+
+</head>
+    <body>
+    <nav th:replace="fragments/nav :: nav"></nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4" style="margin:40px auto" >
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <div th:if="${errorMessage}" class="alert alert-danger">
+                                    <span th:text="${errorMessage}"></span>
+                                </div>
+                                <p>Enter your email address and we will send you the steps to reset your password.</p>
+                                <div class="panel-body">
+                                    <form id="register-form" role="form"  th:action="@{/invalid-token}" autocomplete="off" class="form" method="post">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
